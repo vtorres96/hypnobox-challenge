@@ -15,14 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/contacts', function () {
-    return view('contacts');
-})->name('contacts');
-
 Auth::routes();
 
 Route::middleware(['auth'])->group(function (){
 
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/contacts', 'ContactController@index')->name('contacts-index');
+
+    Route::get('/contacts/create', 'ContactController@create')->name('contacts-create');
+
+    Route::get('/contacts/edit/{id}', 'ContactController@edit')->name('contacts-edit');
+
+    Route::delete('/contacts/remove/{id}', 'ContactController@destroy');
 
 });
