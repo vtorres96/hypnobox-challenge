@@ -23,9 +23,13 @@ Route::middleware(['auth'])->group(function (){
 
     Route::get('/contacts', 'ContactController@index')->name('contacts-index');
 
+    Route::get('/contacts/show/{id}', 'ContactController@show')->name('contacts-show');
+
     Route::get('/contacts/create', 'ContactController@create')->name('contacts-create');
+    Route::post('/contacts/create', 'ContactController@store');
 
     Route::get('/contacts/edit/{id}', 'ContactController@edit')->name('contacts-edit');
+    Route::put('/contacts/edit/{id}', 'ContactController@update');
 
     Route::delete('/contacts/remove/{id}', 'ContactController@destroy');
 
