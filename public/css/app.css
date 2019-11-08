@@ -102,10 +102,6 @@ p {
     margin-bottom: 1rem;
 }
 
-i.fas.fa-cubes.pr-2.fs-25 {
-    font-size: 25px;
-}
-
 abbr[title],
 abbr[data-original-title] {
     text-decoration: underline;
