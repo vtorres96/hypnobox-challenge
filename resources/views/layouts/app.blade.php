@@ -3,13 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    
     <title>{{ config('app.name', 'HYPNOAgenda') }}</title>
-
-    <!-- Scripts -->
+        
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -19,57 +18,60 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script defer src="{{url('js/app.js')}}"></script>
 </head>
 <body>
     <div id="app">
-        <header>
-            <nav class="navbar navbar-dark bg-primary">
-                <a class="navbar-brand" href="#">
-                    <i class="fas fa-cubes pr-2 fs-25"></i>
-                    HYPNOAgenda
+        <header class="bg-primary">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary container">
+                <a class="navbar-brand" href="{{ route('welcome') }}">
+                    <i class="fas fa-cubes"></i>
+                    HypnoAgenda
                 </a>
-                @guest
-                    <ul class="navbar-nav flex-row mr-auto">
-                        <li class="nav-item">
-                            <a href="{{ route('welcome') }}" class="nav-link pr-2 text-white">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('login') }}" class="nav-link pr-2 text-white">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    @guest
+                        <ul class="navbar-nav flex-row mr-auto p-0">
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a href="{{ route('register') }}" class="nav-link pr-2 text-white">{{ __('Cadastro') }}</a>
+                                </li>
+                            @endif
+                        </ul>
+                        <ul class="navbar-nav flex-row ml-auto p-0">
                             <li class="nav-item">
-                                <a href="{{ route('register') }}" class="nav-link pr-2 text-white">{{ __('Cadastro') }}</a>
+                                <a href="{{ route('login') }}" class="nav-link pr-2 text-white">{{ __('Minha Conta') }}</a>
                             </li>
-                        @endif
-                    </ul>
-                @else
-                    <ul class="navbar-nav flex-row mr-auto">
-                        <li class="nav-item">
-                            <a href="{{ route('contacts') }}" class="nav-link pr-2 text-white">Contatos</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav flex-row ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link pr-4 text-white" href="">
-                                Olá, {{ Auth::user()->name }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                {{ __('Sair') }}
-                            </a>
+                        </ul>
+                    @else
+                        <ul class="navbar-nav flex-row mr-auto text-white">
+                            <li class="nav-item">
+                                <a href="{{ route('contacts-index') }}" class="nav-link pr-2 text-white">Contatos</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-row ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Olá, {{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Editar Perfil</a>
+                                <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                        {{ __('Sair') }}
+                                    </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
-                @endguest
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    @endguest
+                </div>
             </nav>
         </header>
         <main class="container my-5">
