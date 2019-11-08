@@ -9,6 +9,7 @@
     
     <title>{{ config('app.name', 'HYPNOAgenda') }}</title>
         
+    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
