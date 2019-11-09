@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Contact; 
+use App\Contact;
 use App\User;
 
 class ContactController extends Controller
 {
     public function index(){
         $user_id = Auth::user()->id;
-        $contacts = Contact::where('user_id', '=', $user_id)->get();
+        $contacts = Contact::where('user_id', '=', $user_id)->paginate(5);
 
         return view('contact.index')->with('contacts', $contacts);
     }
@@ -29,7 +29,7 @@ class ContactController extends Controller
     public function store(Request $request){
         $request->validate([
             'nome' => 'required|max:50',
-            'sobrenome' => 'required|max:50',                    
+            'sobrenome' => 'required|max:50',
             'telefone' => 'required|max:15',
             'email' => 'email|max:80|unique:contacts',
             'data_de_nascimento' => 'required',
@@ -39,7 +39,7 @@ class ContactController extends Controller
         $arquivo = $request->file('avatar');
 
         if (empty($arquivo)) {
-            $caminhoRelativo = 'null';
+            $caminhoRelativo = null;
         } else {
             $arquivo->storePublicly('uploads');
             $caminhoAbsoluto = public_path()."/storage/uploads";
@@ -70,7 +70,7 @@ class ContactController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'nome' => 'required|max:50',
-            'sobrenome' => 'required|max:50',                    
+            'sobrenome' => 'required|max:50',
             'telefone' => 'required|max:15',
             'data_de_nascimento' => 'required',
             'avatar' => 'nullable|sometimes|image|mimes:jpg,jpeg,png,gif'
@@ -79,7 +79,7 @@ class ContactController extends Controller
         $arquivo = $request->file('avatar');
 
         if (empty($arquivo)) {
-            $caminhoRelativo = 'null';
+            $caminhoRelativo = null;
         } else {
             $arquivo->storePublicly('uploads');
             $caminhoAbsoluto = public_path()."/storage/uploads";
@@ -88,13 +88,15 @@ class ContactController extends Controller
             $arquivo->move($caminhoAbsoluto, $nomeArquivo);
         }
 
-        $contact = Contact::update([
+        $contact = Contact::fill([
             'first_name' => $request->input('nome'),
             'last_name' => $request->input('sobrenome'),
             'phone_number' => $request->input('telefone'),
             'date_of_birth' => $request->input('data_de_nascimento'),
             'avatar' => $caminhoRelativo
         ]);
+
+        $contact->update();
 
         return redirect('/contacts');
     }

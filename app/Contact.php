@@ -13,6 +13,6 @@ class Contact extends Model
     ];
 
     public function getAvatarImageAttribute($value) {
-        return $this->avatar == 'null' ? asset('img/null.png') : asset($this->avatar);
+        return $this->avatar == null ? asset('img/null.png') : asset($this->avatar);
     }
 }

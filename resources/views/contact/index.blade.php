@@ -30,8 +30,8 @@
                                         @foreach ($contacts as $contact)
                                             <tr>
                                                 <td><img src="{{ $contact->avatar_image }}" class="rounded-circle" width="35" height="35"></td>
-                                                <td>{{ $contact->first_name }}</a></td>   
-                                                <td>{{ $contact->last_name }}</a></td>                                    
+                                                <td>{{ $contact->first_name }}</a></td>
+                                                <td>{{ $contact->last_name }}</a></td>
                                                 <td class="d-none d-md-table-cell">{{ $contact->phone_number }}</a></td>
                                                 <td class="d-none d-md-table-cell">{{ $contact->email }}</a></td>
                                                 <td>
@@ -76,6 +76,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-center mt-4">
+                                    {{ $contacts->appends(['search' => isset($search) ? $search : ''])->links() }}
+                                </div>
                             </div>
                         @endif
                     </div>

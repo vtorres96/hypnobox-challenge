@@ -13,9 +13,9 @@
                     </div>
                     <div class="card-body">
                         <form action="{{ url('contacts/edit/'.$contact->id) }}" method="POST" enctype="multipart/form-data">
-                            
+
                             @csrf
-                            {{ method_field('PUT') }}     
+                            {{ method_field('PUT') }}
 
                             <div class="form-group">
                                 <label for="first_name">Nome</label>
@@ -49,10 +49,10 @@
 
                             <div class="form-group">
                                 <label for="avatar">Avatar</label>
-                                <input type="file" class="form-control-file{{$errors->has('avatar') ? ' is-invalid':''}}" id="avatar" name="avatar" accept=".jpg, .jpeg, .png .gif">
+                                <input type="file" class="form-control-file{{$errors->has('avatar') ? ' is-invalid':''}}" id="avatar" name="avatar">
                                 <div class="invalid-feedback" style="display:inherit">{{ $errors->first('avatar') }}</div>
                             </div>
-                            
+
                             <div class="card-footer text-right">
                                 <a href="#" onclick="history.back()" class="btn btn-secondary">Voltar</a>
                                 <button type="submit" class="btn btn-primary">Salvar</button>
