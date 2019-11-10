@@ -11,7 +11,6 @@ $factory->define(Contact::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'phone_number' => $faker->cellphoneNumber,
         'email' => $faker->unique()->safeEmail,
-        'date_of_birth' => $faker->date("Y-m-d"),
         'user_id' => 1
     ];
 });

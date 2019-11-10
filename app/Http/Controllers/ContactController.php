@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Contact;
 use App\User;
+use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
 {
@@ -26,15 +27,8 @@ class ContactController extends Controller
         return view('contact.create');
     }
 
-    public function store(Request $request){
-        $request->validate([
-            'nome' => 'required|max:50',
-            'sobrenome' => 'required|max:50',
-            'telefone' => 'required|max:15',
-            'email' => 'email|max:80|unique:contacts',
-            'data_de_nascimento' => 'required',
-            'avatar' => 'nullable|sometimes|image|mimes:jpg,jpeg,png,gif'
-        ]);
+    public function store(ContactRequest $request){
+        $request->all();
 
         $arquivo = $request->file('avatar');
 
@@ -53,7 +47,6 @@ class ContactController extends Controller
             'last_name' => $request->input('sobrenome'),
             'phone_number' => $request->input('telefone'),
             'email' => $request->input('email'),
-            'date_of_birth' => $request->input('data_de_nascimento'),
             'avatar' => $caminhoRelativo,
             'user_id' => Auth::user()->id
         ]);
@@ -67,14 +60,10 @@ class ContactController extends Controller
         return view('contact.edit')->with('contact', $contact);
     }
 
-    public function update(Request $request, $id){
-        $request->validate([
-            'nome' => 'required|max:50',
-            'sobrenome' => 'required|max:50',
-            'telefone' => 'required|max:15',
-            'data_de_nascimento' => 'required',
-            'avatar' => 'nullable|sometimes|image|mimes:jpg,jpeg,png,gif'
-        ]);
+    public function update(ContactRequest $request, $id){
+        $contact = Contact::find($id);
+
+        $request->all();
 
         $arquivo = $request->file('avatar');
 
@@ -88,17 +77,14 @@ class ContactController extends Controller
             $arquivo->move($caminhoAbsoluto, $nomeArquivo);
         }
 
-        $contact = Contact::fill([
-            'first_name' => $request->input('nome'),
-            'last_name' => $request->input('sobrenome'),
-            'phone_number' => $request->input('telefone'),
-            'date_of_birth' => $request->input('data_de_nascimento'),
-            'avatar' => $caminhoRelativo
-        ]);
+        $contact->first_name = $request->input('nome');
+        $contact->last_name = $request->input('sobrenome');
+        $contact->phone_number = $request->input('telefone');
+        $contact->avatar = $caminhoRelativo;
 
-        $contact->update();
+        $contact->save();
 
-        return redirect('/contacts');
+        return redirect('/contacts/show/'.$contact->id);
     }
 
     public function destroy($id){

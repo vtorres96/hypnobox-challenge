@@ -20,19 +20,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="saudacao" class="control-label">Sobreome</label>
-                                <span class="form-control-static">{{ $contact->last_name }}</span>
+                                    <span class="form-control-static">{{ $contact->last_name }}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="telefone">Telefone: </label>
-                                <span class="form-control-static">{{ $contact->phone_number }}</span>
+                                    <span class="form-control-static">{{ $contact->phone_number }}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-mail: </label>
-                                <span class="form-control-static">{{ $contact->email }}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="data_nascimento">Data de Nascimento: </label>
-                                    <span class="form-control-static">{{ date('d/m/Y', strtotime($contact->date_of_birth)) }}</span>
+                                    <span class="form-control-static">{{ $contact->email }}</span>
                                 </div>
                                 <div class="form-group">
                                     <a href="/contacts">

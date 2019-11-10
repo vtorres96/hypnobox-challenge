@@ -11,13 +11,13 @@
                     </div>
                     <div class="card-body">
                         <form action="{{ url('contacts/create') }}" method="POST" enctype="multipart/form-data">
-                            
+
                             @csrf
-                            {{ method_field('POST') }}    
+                            {{ method_field('POST') }}
 
                             <div class="form-group">
                                 <label for="nome">Nome</label>
-                                <input type="text" class="form-control{{$errors->has('nome') ? ' is-invalid':''}}" value="{{ old('nome') }}" id="first_name" name="nome">
+                                <input type="text" class="form-control{{$errors->has('nome') ? ' is-invalid':''}}" value="{{ old('nome') }}" id="nome" name="nome">
                                 <div class="invalid-feedback">{{ $errors->first('nome') }}</div>
                             </div>
 
@@ -40,17 +40,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="data_de_nascimento">Data de Nascimento</label>
-                                <input type="date" class="form-control{{$errors->has('data_de_nascimento') ? ' is-invalid':''}}" id="data_de_nascimento" value="{{ old('data_de_nascimento') }}" name="data_de_nascimento" placeholder="00/00/0000">
-                                <div class="invalid-feedback">{{ $errors->first('data_de_nascimento') }}</div>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="avatar">Avatar</label>
                                 <input type="file" class="form-control-file{{$errors->has('avatar') ? ' is-invalid':''}}" id="avatar" name="avatar">
                                 <div class="invalid-feedback" style="display:inherit">{{ $errors->first('avatar') }}</div>
                             </div>
-                            
+
                             <div class="card-footer text-right">
                                 <a href="#" onclick="history.back()" class="btn btn-secondary">Voltar</a>
                                 <button type="submit" class="btn btn-primary">Salvar</button>

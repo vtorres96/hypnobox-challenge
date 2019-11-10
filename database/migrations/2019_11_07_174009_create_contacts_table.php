@@ -19,7 +19,6 @@ class CreateContactsTable extends Migration
             $table->string('last_name', 50);
             $table->char('phone_number', 15);
             $table->string('email', 80);
-            $table->date('date_of_birth');
             $table->string('avatar', 200)->nullable();
             $table->timestamps();
         });
