@@ -26,7 +26,7 @@
                         @if($contacts->isEmpty())
                             <section class="row">
                                 <div class="col-12">
-                                    <h1 class="col-12 text-center">Que pena! Você não tem contatos adicionados a sua agenda.</h1>
+                                    <h1 class="col-12 text-center">Que pena! Não encontramos contatos na sua agenda.</h1>
                                 </div>
                             </section>
                         @else

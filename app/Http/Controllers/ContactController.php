@@ -68,7 +68,7 @@ class ContactController extends Controller
         $arquivo = $request->file('avatar');
 
         if (empty($arquivo)) {
-            $caminhoRelativo = null;
+            $caminhoRelativo = $contact->avatar;
         } else {
             $arquivo->storePublicly('uploads');
             $caminhoAbsoluto = public_path()."/storage/uploads";
@@ -80,6 +80,7 @@ class ContactController extends Controller
         $contact->first_name = $request->input('nome');
         $contact->last_name = $request->input('sobrenome');
         $contact->phone_number = $request->input('telefone');
+        $contact->email = $request->input('email');
         $contact->avatar = $caminhoRelativo;
 
         $contact->save();
