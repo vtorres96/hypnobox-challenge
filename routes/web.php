@@ -33,4 +33,5 @@ Route::middleware(['auth'])->group(function (){
 
     Route::delete('/contacts/remove/{id}', 'ContactController@destroy');
 
+    Route::get('/contacts/filter-contacts', 'ContactController@search');
 });

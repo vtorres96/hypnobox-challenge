@@ -94,4 +94,15 @@ class ContactController extends Controller
 
         return redirect('/contacts');
     }
+
+    public function search(Request $request){
+        $search = $request->input('search');
+
+        $contacts = Contact::
+              where('first_name', 'like', '%'.$search.'%')
+              ->orWhere('last_name', 'like', '%'.$search.'%')
+              ->paginate(5);
+
+        return view('contact.index')->with(['contacts' => $contacts, 'search' => $search]);
+    }
 }

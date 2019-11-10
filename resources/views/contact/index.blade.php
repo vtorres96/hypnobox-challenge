@@ -12,6 +12,12 @@
                         <button class="btn btn-primary">Novo Contato</button>
                     </a>
                 </div>
+                <div class="mb-4">
+                    <form class="form-inline" action="{{ url('/contacts/filter-contacts') }}" method="GET">
+                        <input class="form-control col-10" type="text" name="search" id="search" placeholder="O que você procura?">
+                        <button class="btn btn-outline-primary col-2" type="submit">Pesquisar</button>
+                    </form>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         Contatos
