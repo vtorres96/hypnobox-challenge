@@ -3,10 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="message alert-success d-none p-2 my-4">
-                    Contato alterado com sucesso
-                </div>
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
                         Contatos
