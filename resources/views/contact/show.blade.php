@@ -19,7 +19,7 @@
                                     <span class="form-control-static">{{ $contact->first_name }}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="saudacao" class="control-label">Sobreome</label>
+                                    <label for="saudacao" class="control-label">Sobrenome</label>
                                     <span class="form-control-static">{{ $contact->last_name }}</span>
                                 </div>
                                 <div class="form-group">
